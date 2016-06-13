@@ -1,1 +1,0 @@
-CINews Application Demo
