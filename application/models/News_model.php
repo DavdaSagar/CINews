@@ -13,5 +13,16 @@
             $query = $this->db->get_where('news', array("slug"=>$slug));
             return $query->row_array();
         }
+        public function set_news($file_name){
+            
+            $data = array(
+                'title' => $this->input->post('title'),
+                'slug' => $this->input->post('slug'),
+                'text'=> $this->input->post('description'),
+                    'image' => $file_name
+            );
+            
+            return $this->db->insert('news',$data);
+        }
     }
 ?>

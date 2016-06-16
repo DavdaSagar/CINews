@@ -6,7 +6,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <title><?php echo $title; ?></title>
-        <link rel="stylesheet" href="<?php echo base_url();?>">
+        <link rel="stylesheet" href="<?php echo base_url()."assets/css/bootstrap.min.css";?>">
     </head>
 
     <body>
+        
+        <div class="container">

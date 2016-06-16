@@ -31,5 +31,58 @@ class News extends CI_Controller{
         $this->load->view('templates/footer');
     }
     
+    public function add(){
+        
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('slug', 'Slug', 'required');
+        $this->form_validation->set_rules('description', 'Text', 'required');
+        
+        $data['title'] = "Add News";
+        
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->load->view('templates/header',$data);
+            $this->load->view('news/add');
+            $this->load->view('templates/footer');
+        }
+        else{
+            
+            $file_name = '';
+            if(!empty($_FILES['image']['name'])){
+                
+                $config['upload_path']          = './uploads/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 100;
+                $config['max_width']            = 1024;
+                $config['max_height']           = 768;
+                $config['file_name'] = date("Ymdhis");
+                
+                $this->load->library('upload', $config);
+                
+                if(!$this->upload->do_upload('image')){
+                    
+                    $data['title'] = "News image upload failed";
+                    $data['result'] = "Failed";
+                    $data['error_message'] = $this->upload->display_errors();
+                    
+                }else{
+                    
+                    $data['title'] = "News has been added";
+                    $data['result'] = 'Success';
+                    $file_name = $this->upload->data('file_name');
+                }      
+            }
+            
+            
+            $this->news_model->set_news($file_name);
+            $this->load->view('templates/header',$data);
+            $this->load->view('news/add',$data);
+            $this->load->view('templates/footer');
+        }
+    }
+    
 }
 

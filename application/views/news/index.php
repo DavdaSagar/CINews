@@ -1,3 +1,4 @@
+<a href="<?php echo site_url('news/add'); ?>" class="pull-right" >Add Breaking News</a>
 <?php
     foreach ($news as $news_item) {
         ?>
