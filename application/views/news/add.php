@@ -27,22 +27,27 @@
       echo form_open_multipart('','class="form-horizontal" '); 
       ?>
       <div class="form-group">
-        <label for="title">Title</label>
+        <label class="control-label col-sm-1" for="title">Title</label>
+        <div class="col-sm-10">
         <input type="text" class="form-control" id="title" name="title" placeholder="Title" >
+        </div>
       </div>
       <div class="form-group">
-        <label for="slug">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+        <label class="control-label col-sm-1" for="slug">Slug</label>
+        <div class="col-sm-10"><input type="text" class="form-control" id="slug" name="slug" placeholder="Slug"></div>
       </div>
       <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+        <label class="control-label col-sm-1" for="description">Description</label>
+        <div class="col-sm-10"><textarea class="form-control" rows="5" id="description" name="description"></textarea></div>
       </div>
       <div class="form-group">
-        <label for="image">Image</label>
-        <input type="file" id="image" name="image">
-        <p class="help-block">News Image</p>
+        <label class="control-label col-sm-1" for="image">Image</label>
+        <div class="col-sm-10"><input type="file" id="image" name="image"></div>
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+        <div class="form-group">
+        <label class="control-label col-sm-1"></label>
+        <div class="col-sm-10"><button type="submit" class="btn btn-default">Submit</button></div>
+      </div>
+      
     </form>
 </div>

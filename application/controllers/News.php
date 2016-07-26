@@ -31,6 +31,22 @@ class News extends CI_Controller{
         $this->load->view('templates/footer');
     }
     
+    public function ajax_view($slug = NULL){
+        if(empty($slug)){
+            $slug = $this->input->post('slug');
+        }
+        $data['news_item'] = $this->news_model->get_news($slug);
+        
+        if(empty($data['news_item'])){
+            show_404();
+        }
+        
+        $data['title'] = $data['news_item']['title'];
+        
+        $this->load->view('news/ajax/view',$data);        
+    }
+
+
     public function add(){
         
         $this->load->helper('form');
@@ -68,16 +84,17 @@ class News extends CI_Controller{
                     $data['result'] = "Failed";
                     $data['error_message'] = $this->upload->display_errors();
                     
-                }else{
-                    
-                    $data['title'] = "News has been added";
-                    $data['result'] = 'Success';
+                }else{                                        
                     $file_name = $this->upload->data('file_name');
                 }      
             }
             
             
-            $this->news_model->set_news($file_name);
+            $result = $this->news_model->set_news($file_name);
+            if($result){
+                $data['title'] = "News has been added";
+                $data['result'] = 'Success';
+            }
             $this->load->view('templates/header',$data);
             $this->load->view('news/add',$data);
             $this->load->view('templates/footer');

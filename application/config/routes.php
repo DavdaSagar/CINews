@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['news/add'] = 'news/add';
+$route['news/news_ajax'] = 'news/ajax_view';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news';
 $route['default_controller'] = 'news';
