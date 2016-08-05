@@ -51,7 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['news/add'] = 'news/add';
 $route['news/news_ajax'] = 'news/ajax_view';
-$route['news/(:any)'] = 'news/view/$1';
+$route['news/view/(:any)'] = 'news/view/$1';
+$route['news/(:any)'] = 'news/index/$1';
 $route['news'] = 'news';
 $route['default_controller'] = 'news';
 $route['404_override'] = '';

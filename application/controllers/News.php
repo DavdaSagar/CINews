@@ -7,9 +7,24 @@ class News extends CI_Controller{
         $this->load->model('news_model');
         $this->load->helper('url_helper');
     }
-    
+
     public function index(){
-        $data['news'] = $this->news_model->get_news();
+                
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('news');
+        $config['total_rows'] = $this->news_model->get_total_news();
+        $config['first_link'] = 'First';
+        $config['last_link'] = 'Last';
+        $config['next_link'] = ' Next';
+        $config['prev_link'] = 'Previous ';
+        $config['per_page'] = 5;
+
+        $this->pagination->initialize($config);
+        
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        
+        $data['news'] = $this->news_model->get_news_page($config['per_page'],$page);
+        $data['links'] = $this->pagination->create_links();
         $data['title'] = "Latest News";
         
         $this->load->view("templates/header",$data);
@@ -33,9 +48,9 @@ class News extends CI_Controller{
     
     public function ajax_view($slug = NULL){
         if(empty($slug)){
-            $slug = $this->input->post('slug');
+            $data_id = $this->input->post('data_id');
         }
-        $data['news_item'] = $this->news_model->get_news($slug);
+        $data['news_item'] = $this->news_model->get_news_by_id($data_id);
         
         if(empty($data['news_item'])){
             show_404();
